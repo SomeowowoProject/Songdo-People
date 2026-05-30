@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SONGDO &amp; PEOPLE — 송도앤피플</title>
+  <meta name="description" content="송도앤피플 — 신뢰받는 지역·국제 뉴스. 정치, 경제, 사회, 국제, 문화, 스포츠, 오피니언.">
+  <meta name="theme-color" content="#0D1B2A">
+  <meta property="og:title" content="SONGDO &amp; PEOPLE">
+  <meta property="og:description" content="신뢰받는 지역·국제 뉴스">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   SONGDO & PEOPLE — Stylesheet
+   Design grammar: Dieter Rams ("Weniger, aber besser")
+   3색만: Navy / Paper / Red  (그레이 미사용; 위계는 Navy tint로)
+   ============================================================ */
+
+:root {
+  --navy:  #0D1B2A;
+  --paper: #FAFAF8;
+  --red:   #C8102E;
+  --navy-70: rgba(13, 27, 42, 0.70);
+  --navy-55: rgba(13, 27, 42, 0.55);
+  --navy-14: rgba(13, 27, 42, 0.14);
+  --navy-08: rgba(13, 27, 42, 0.08);
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans:  "Helvetica Neue", Helvetica, Arial, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", sans-serif;
+  --max: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  background: var(--paper); color: var(--navy); font-family: var(--sans);
+  font-size: 16px; line-height: 1.5; letter-spacing: 0.01em;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--navy); color: var(--paper); padding: 10px 16px; z-index: 100; font-size: 13px; }
+.skip-link:focus { left: 0; }
+
+/* ① 유틸리티 */
+.utility { border-bottom: 1px solid var(--navy-14); }
+.utility__inner { display: flex; align-items: center; justify-content: space-between; height: 38px; font-size: 12px; letter-spacing: 0.04em; }
+.utility__date { color: var(--navy-70); text-transform: uppercase; }
+.utility__right { display: flex; align-items: center; gap: 20px; }
+.utility__weather { color: var(--navy-70); }
+.utility__link:hover { color: var(--red); }
+.utility__link--accent { color: var(--red); font-weight: 700; }
+
+/* ② 마스트헤드 */
+.masthead { border-bottom: 1px solid var(--navy); }
+.masthead__inner { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; padding: 26px 24px; }
+.logo { font-family: var(--serif); color: var(--navy); text-align: center; line-height: 0.92; grid-column: 2; display: flex; align-items: baseline; justify-content: center; gap: 0.28em; flex-wrap: wrap; }
+.logo__line { font-weight: 600; font-size: clamp(30px, 6vw, 58px); letter-spacing: 0.04em; text-transform: uppercase; }
+.logo__amp { font-style: italic; font-weight: 500; font-size: clamp(26px, 5vw, 50px); }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 6px; grid-column: 1; }
+.nav-toggle span { width: 22px; height: 1.5px; background: var(--navy); transition: .25s; }
+.nav-toggle[aria-expanded="true"] span:nth-child(1){ transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-6.5px) rotate(-45deg); }
+.search-btn { background: none; border: 0; color: var(--navy); cursor: pointer; grid-column: 3; justify-self: end; display: flex; }
+.search-btn:hover { color: var(--red); }
+
+/* ③ 내비 */
+.nav { border-bottom: 1px solid var(--navy-14); }
+.nav__list { display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; }
+.nav__link { display: block; padding: 13px 18px; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; position: relative; }
+.nav__link::after { content: ""; position: absolute; left: 18px; right: 18px; bottom: 8px; height: 1.5px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .22s ease; }
+.nav__link:hover::after, .nav__link.is-active::after { transform: scaleX(1); }
+.nav__link.is-active { font-weight: 700; }
+
+/* 검색바 */
+.searchbar { border-bottom: 1px solid var(--navy-14); background: var(--paper); }
+.searchbar__inner { display: flex; align-items: center; gap: 12px; height: 64px; }
+.searchbar__input { flex: 1; border: 0; border-bottom: 1.5px solid var(--navy); background: transparent; font-family: var(--serif); font-size: 22px; padding: 8px 0; color: var(--navy); outline: none; }
+.searchbar__input::placeholder { color: var(--navy-55); }
+.searchbar__go { background: var(--navy); color: var(--paper); border: 0; padding: 10px 20px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; }
+.searchbar__go:hover { background: var(--red); }
+.searchbar__close { background: none; border: 0; color: var(--navy-70); font-size: 18px; cursor: pointer; padding: 8px; }
+.searchbar__close:hover { color: var(--red); }
+
+/* ④ 티커 */
+.ticker { border-bottom: 1px solid var(--navy-14); }
+.ticker__inner { display: flex; align-items: center; height: 44px; }
+.ticker__label { flex: 0 0 auto; background: var(--red); color: var(--paper); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; padding: 5px 14px; margin-right: 20px; text-transform: uppercase; }
+.ticker__viewport { overflow: hidden; flex: 1; }
+.ticker__track { display: inline-flex; gap: 56px; white-space: nowrap; animation: ticker 38s linear infinite; will-change: transform; }
+.ticker:hover .ticker__track { animation-play-state: paused; }
+.ticker__item { font-size: 14px; position: relative; }
+.ticker__item:hover { color: var(--red); }
+.ticker__item::before { content: ""; position: absolute; left: -28px; top: 50%; width: 3px; height: 3px; background: var(--red); transform: translateY(-50%); }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker__track { animation: none; } }
+
+/* 공통 */
+.kicker { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+.kicker--sm { font-size: 11px; margin-bottom: 8px; }
+.byline { font-size: 12px; color: var(--navy-55); letter-spacing: 0.03em; margin-top: 18px; }
+.section { padding: 48px 0; border-top: 1px solid var(--navy-14); }
+.section__head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 28px; }
+.section__title { font-family: var(--serif); font-weight: 700; font-size: 24px; }
+.section__more { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--navy-70); }
+.section__more:hover { color: var(--red); }
+
+/* ⑤ 히어로 */
+.hero { display: grid; grid-template-columns: 1.85fr 1fr; gap: 56px; padding: 48px 0 8px; }
+.lead__title { font-family: var(--serif); font-weight: 800; font-size: clamp(34px, 5vw, 56px); line-height: 1.04; letter-spacing: -0.01em; margin-bottom: 18px; }
+.lead__title a:hover { color: var(--red); }
+.lead__dek { font-size: 19px; line-height: 1.55; color: var(--navy-70); max-width: 60ch; margin-bottom: 28px; }
+.lead__figure { margin-top: 8px; }
+.figcaption { font-size: 12px; color: var(--navy-55); padding-top: 10px; letter-spacing: 0.02em; }
+.rail { border-left: 1px solid var(--navy-14); padding-left: 40px; }
+.rail__item { padding-bottom: 26px; margin-bottom: 26px; border-bottom: 1px solid var(--navy-14); }
+.rail__item--last { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.rail__title { font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.18; margin-bottom: 10px; }
+.rail__title a:hover { color: var(--red); }
+.rail__dek { font-size: 15px; line-height: 1.5; color: var(--navy-70); }
+
+/* 플레이스홀더 */
+.ph { width: 100%; height: auto; background: var(--navy-08); }
+.ph rect { fill: var(--navy-08); }
+.ph line, .ph circle { stroke: var(--navy); stroke-width: 1.5; fill: none; }
+
+/* ⑥ 그리드 / 카드 */
+.grid { display: grid; gap: 40px; }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.card { border-top: 2px solid var(--navy); padding-top: 18px; }
+.card__figure { margin-bottom: 16px; }
+.card__title { font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.2; margin-bottom: 10px; }
+.card__title a:hover { color: var(--red); }
+.card__dek { font-size: 14px; line-height: 1.5; color: var(--navy-70); }
+
+/* ⑦ 분할 리스트 */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.split .section__head { margin-bottom: 18px; }
+.list__item { border-bottom: 1px solid var(--navy-14); }
+.list__item--last { border-bottom: 0; }
+.list__item a { display: block; padding: 16px 0 16px 22px; font-family: var(--serif); font-size: 19px; font-weight: 500; line-height: 1.3; position: relative; }
+.list__item a::before { content: ""; position: absolute; left: 0; top: 24px; width: 8px; height: 1.5px; background: var(--red); }
+.list__item a:hover { color: var(--red); }
+
+/* ⑧ 오피니언 */
+.op { border-left: 2px solid var(--red); padding-left: 22px; }
+.op__quote { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 22px; line-height: 1.34; letter-spacing: -0.01em; }
+.op__quote a:hover { color: var(--red); }
+.op__author { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; color: var(--navy-70); margin-top: 16px; }
+
+/* ===== 신규: 빵부스러기 / 페이지 헤드 ===== */
+.crumb { display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: 0.04em; color: var(--navy-55); padding: 24px 0 0; }
+.crumb a:hover { color: var(--red); }
+.crumb strong { color: var(--navy); font-weight: 600; }
+.page-head { padding: 28px 0 36px; border-bottom: 2px solid var(--navy); margin-bottom: 40px; }
+.page-head__title { font-family: var(--serif); font-weight: 800; font-size: clamp(36px, 6vw, 60px); letter-spacing: -0.01em; }
+.page-head__count { font-size: 13px; color: var(--navy-55); letter-spacing: 0.04em; margin-top: 12px; }
+
+/* ===== 신규: 카테고리 톱기사 ===== */
+.cat-lead { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; padding-bottom: 8px; }
+.cat-lead__title { font-family: var(--serif); font-weight: 800; font-size: clamp(28px, 4vw, 42px); line-height: 1.08; margin-bottom: 16px; }
+.cat-lead__title a:hover { color: var(--red); }
+.cat-lead__dek { font-size: 17px; line-height: 1.55; color: var(--navy-70); }
+
+/* ===== 신규: 기사 상세 ===== */
+.article { max-width: 760px; margin: 0 auto; padding-top: 20px; }
+.article__title { font-family: var(--serif); font-weight: 800; font-size: clamp(32px, 5vw, 52px); line-height: 1.06; letter-spacing: -0.01em; margin-bottom: 22px; }
+.article__dek { font-size: 21px; line-height: 1.5; color: var(--navy-70); margin-bottom: 26px; }
+.article__meta { display: flex; align-items: center; gap: 12px; font-size: 13px; letter-spacing: 0.04em; color: var(--navy-70); padding-bottom: 24px; border-bottom: 1px solid var(--navy-14); }
+.article__meta-sep { color: var(--red); }
+.article__figure { margin: 32px 0; }
+.article__lead-quote { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.4; border-left: 3px solid var(--red); padding-left: 24px; margin: 8px 0 32px; }
+.article__body { }
+.article__p { font-size: 18px; line-height: 1.8; margin-bottom: 24px; }
+.article__p:first-child::first-letter { font-family: var(--serif); font-weight: 700; font-size: 64px; line-height: 0.8; float: left; padding: 6px 12px 0 0; color: var(--navy); }
+.article__body.static .article__p:first-child::first-letter { font-size: inherit; float: none; padding: 0; font-weight: inherit; font-family: var(--sans); }
+.article__credit { font-size: 12px; color: var(--navy-55); letter-spacing: 0.03em; padding-top: 28px; margin-top: 12px; border-top: 1px solid var(--navy-14); }
+.related { margin-top: 8px; }
+
+/* 빈 결과 / 백링크 */
+.empty { font-family: var(--serif); font-size: 20px; color: var(--navy-70); padding: 24px 0; }
+.backlink { color: var(--red); font-weight: 600; }
+.backlink:hover { text-decoration: underline; }
+
+/* ⑨ 푸터 */
+.footer { background: var(--navy); color: var(--paper); margin-top: 64px; }
+.footer__inner { display: grid; grid-template-columns: 1.2fr 2fr; gap: 56px; padding: 56px 24px 40px; }
+.logo--footer { justify-content: flex-start; }
+.logo--footer .logo__line, .logo--footer .logo__amp { color: var(--paper); font-size: 30px; }
+.logo--footer .logo__amp { font-size: 26px; }
+.footer__tagline { font-size: 13px; color: rgba(250,250,248,0.6); margin-top: 16px; letter-spacing: 0.04em; }
+.footer__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.footer__h { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); padding-bottom: 14px; margin-bottom: 4px; border-bottom: 1px solid rgba(250,250,248,0.18); }
+.footer__col a { display: block; padding: 7px 0; font-size: 14px; color: rgba(250,250,248,0.82); }
+.footer__col a:hover { color: var(--paper); }
+.footer__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 22px 24px; border-top: 1px solid rgba(250,250,248,0.18); font-size: 12px; color: rgba(250,250,248,0.6); letter-spacing: 0.02em; }
+
+/* 반응형 */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 36px; }
+  .rail { border-left: 0; padding-left: 0; border-top: 2px solid var(--navy); padding-top: 28px; }
+  .grid--3 { grid-template-columns: 1fr 1fr; }
+  .split { grid-template-columns: 1fr; gap: 40px; }
+  .cat-lead { grid-template-columns: 1fr; gap: 24px; }
+  .footer__inner { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (max-width: 640px) {
+  .nav-toggle { display: flex; }
+  .masthead__inner { padding: 20px 24px; }
+  .nav__list { display: none; flex-direction: column; gap: 0; padding: 8px 0; }
+  .nav.is-open .nav__list { display: flex; }
+  .nav__link { padding: 14px 24px; text-align: left; }
+  .nav__link::after { left: 24px; right: auto; width: 16px; bottom: 10px; }
+  .grid--3 { grid-template-columns: 1fr; }
+  .footer__cols { grid-template-columns: 1fr 1fr; }
+  .utility__weather { display: none; }
+  .lead__dek { font-size: 17px; }
+  .article__p { font-size: 17px; }
+  .searchbar__input { font-size: 18px; }
+}
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
+  <!-- ① 유틸리티 -->
+  <div class="utility">
+    <div class="container utility__inner">
+      <p class="utility__date" id="js-date">2026년 5월 30일 토요일</p>
+      <div class="utility__right">
+        <span class="utility__weather">인천 송도 · 21°C 맑음</span>
+        <a href="#/subscribe" class="utility__link">로그인</a>
+        <a href="#/subscribe" class="utility__link utility__link--accent">구독</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 마스트헤드 -->
+  <header class="masthead">
+    <div class="container masthead__inner">
+      <button class="nav-toggle" id="js-nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#/" class="logo" aria-label="SONGDO and PEOPLE 홈">
+        <span class="logo__line">SONGDO</span><span class="logo__amp">&amp;</span><span class="logo__line">PEOPLE</span>
+      </a>
+      <button class="search-btn" id="js-search-btn" aria-label="검색">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ③ 내비게이션 (JS가 채움) -->
+  <nav class="nav" id="js-nav" aria-label="주요 메뉴">
+    <div class="container"><ul class="nav__list" id="js-nav-list"></ul></div>
+  </nav>
+
+  <!-- 검색 패널 -->
+  <div class="searchbar" id="js-searchbar" hidden>
+    <div class="container searchbar__inner">
+      <input type="search" id="js-search-input" class="searchbar__input" placeholder="검색어를 입력하세요" aria-label="검색어">
+      <button class="searchbar__go" id="js-search-go">검색</button>
+      <button class="searchbar__close" id="js-search-close" aria-label="검색 닫기">✕</button>
+    </div>
+  </div>
+
+  <!-- ④ 속보 티커 -->
+  <div class="ticker" aria-label="속보">
+    <div class="container ticker__inner">
+      <span class="ticker__label">속보</span>
+      <div class="ticker__viewport"><div class="ticker__track" id="js-ticker"></div></div>
+    </div>
+  </div>
+
+  <!-- 라우터 출력 영역 -->
+  <main id="main"><div class="container" id="js-view"></div></main>
+
+  <!-- ⑨ 푸터 -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#/" class="logo logo--footer" aria-label="SONGDO and PEOPLE">
+          <span class="logo__line">SONGDO</span><span class="logo__amp">&amp;</span><span class="logo__line">PEOPLE</span>
+        </a>
+        <p class="footer__tagline">신뢰받는 지역·국제 저널리즘</p>
+      </div>
+      <nav class="footer__cols" aria-label="푸터 메뉴">
+        <div class="footer__col">
+          <h4 class="footer__h">섹션</h4>
+          <a href="#/category/politics">정치</a><a href="#/category/economy">경제</a><a href="#/category/society">사회</a>
+          <a href="#/category/world">국제</a><a href="#/category/culture">문화</a><a href="#/category/sports">스포츠</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__h">회사</h4>
+          <a href="#/about">회사 소개</a><a href="#/about">윤리강령</a><a href="#/about">광고 문의</a><a href="#/about">채용</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__h">고객</h4>
+          <a href="#/subscribe">구독 안내</a><a href="#/about">제보하기</a><a href="#/about">고객센터</a><a href="#/about">정정보도</a>
+        </div>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <p>© 2026 SONGDO &amp; PEOPLE. All rights reserved.</p>
+      <p>인천광역시 연수구 송도과학로 · 등록번호 인천-가-00000</p>
+    </div>
+  </footer>
+
+  <script>
+/* SONGDO & PEOPLE — 기사 데이터 스토어
+   실제 서비스라면 이 부분이 CMS/API에서 옵니다.
+   정적 사이트이므로 데이터를 JS 객체로 보관합니다. */
+
+window.CATEGORIES = [
+  { slug: "home",     name: "홈" },
+  { slug: "politics", name: "정치" },
+  { slug: "economy",  name: "경제" },
+  { slug: "society",  name: "사회" },
+  { slug: "world",    name: "국제" },
+  { slug: "culture",  name: "문화" },
+  { slug: "sports",   name: "스포츠" },
+  { slug: "opinion",  name: "오피니언" }
+];
+
+window.ARTICLES = [
+  {
+    id: "songdo-bio-hub",
+    cat: "society", catName: "사회",
+    kicker: "단독 · 도시개발",
+    title: "송도국제도시, 글로벌 바이오 허브로 도약하다",
+    dek: "국내외 30개 바이오·제약 기업이 입주를 확정한 신규 연구단지가 착공에 들어갔다. 송도는 2030년까지 동북아 바이오 생산의 핵심 거점으로 자리매김할 전망이다.",
+    author: "박지현", date: "2026-05-30",
+    figcaption: "송도 7공구 신규 연구단지 조감도. — 송도앤피플 자료사진",
+    lead: true, featured: true,
+    body: [
+      "인천 송도국제도시 7공구에서 신규 바이오 연구단지 착공식이 열렸다. 이날 행사에는 국내외 제약·바이오 기업 관계자와 지방자치단체장, 연구기관 대표 등 300여 명이 참석했다.",
+      "이번 연구단지에는 백신·세포치료제·바이오시밀러 분야의 국내외 기업 30곳이 입주를 확정했다. 단지 조성이 마무리되는 2030년에는 직접 고용 인원만 1만 2천 명에 이를 것으로 전망된다.",
+      "사업을 총괄하는 인천경제자유구역청은 연구·생산·임상이 한 곳에서 이뤄지는 통합형 클러스터를 목표로 하고 있다고 설명했다. 인근 대학·병원과의 산학 협력 체계도 함께 구축된다.",
+      "전문가들은 송도가 이미 갖춘 물류 인프라와 국제공항 접근성을 강점으로 꼽았다. 한 산업연구원 연구위원은 생산 시설과 수출 경로가 가깝게 연결돼 있어 글로벌 공급망에서 경쟁력을 가질 수 있다고 분석했다.",
+      "다만 우수 인력 확보와 정주 여건 개선이 과제로 지적된다. 시는 연구인력 정착을 위한 주거·교육 지원책을 별도로 마련할 계획이라고 밝혔다."
+    ]
+  },
+  {
+    id: "bok-rate-freeze",
+    cat: "economy", catName: "경제",
+    kicker: "통화정책",
+    title: "한국은행 기준금리 동결… \"하반기 인하 기대감\"",
+    dek: "금융통화위원회가 기준금리를 현 수준에서 유지하기로 결정했다. 시장은 물가 안정세를 근거로 연내 인하 가능성에 무게를 두고 있다.",
+    author: "이도현", date: "2026-05-29", featured: true,
+    body: [
+      "한국은행 금융통화위원회가 기준금리를 현재 수준에서 동결하기로 결정했다. 물가 둔화 흐름과 경기 회복 속도를 함께 고려한 판단이라는 설명이다.",
+      "한은 총재는 기자간담회에서 물가가 목표 수준에 점차 근접하고 있다면서도, 대외 불확실성이 남아 있어 신중하게 정책을 운용하겠다고 밝혔다.",
+      "시장 참가자들은 이번 동결을 사실상의 인하 신호로 받아들이는 분위기다. 다수의 증권사는 하반기 중 금리 인하가 시작될 것으로 전망했다.",
+      "다만 가계부채 증가세와 환율 변동성은 여전히 변수로 꼽힌다. 한 채권 전문가는 인하 시점과 폭은 향후 물가·고용 지표에 따라 조정될 것이라고 내다봤다."
+    ]
+  },
+  {
+    id: "incheon-airport-t2",
+    cat: "society", catName: "사회",
+    kicker: "인프라",
+    title: "인천공항 제2터미널 확장 완료, 연 1억 명 시대",
+    dek: "제2여객터미널 확장 공사가 마무리되며 인천국제공항의 연간 수용 능력이 1억 명을 넘어섰다.",
+    author: "최은비", date: "2026-05-28", featured: true,
+    body: [
+      "인천국제공항 제2여객터미널 확장 공사가 완료됐다. 이로써 인천공항의 연간 여객 처리 능력은 1억 명을 넘어서게 됐다.",
+      "확장된 터미널에는 자동 수속 설비와 스마트 보안 검색대가 대폭 늘었다. 공항공사는 평균 출국 소요 시간이 기존보다 크게 줄어들 것으로 기대했다.",
+      "면세 구역과 환승 라운지도 새롭게 단장했다. 운영 측은 환승 거점으로서의 경쟁력을 강화해 동북아 허브 공항의 위상을 굳히겠다고 밝혔다."
+    ]
+  },
+  {
+    id: "asia-carbon-neutral",
+    cat: "world", catName: "국제",
+    kicker: "기후",
+    title: "아시아 주요 도시, 탄소중립 공동 선언 채택",
+    dek: "서울·도쿄·싱가포르 등 12개 도시가 2040년 탄소중립 달성을 위한 공동 협약에 서명했다.",
+    author: "정세훈", date: "2026-05-27", featured: true,
+    body: [
+      "아시아 12개 주요 도시 대표가 한자리에 모여 2040년까지 탄소중립을 달성하기 위한 공동 선언에 서명했다.",
+      "참여 도시들은 재생에너지 전환, 대중교통 확충, 건물 에너지 효율 개선을 핵심 과제로 제시했다. 도시 간 기술 공유와 데이터 협력 체계도 함께 마련하기로 했다.",
+      "한 환경정책 전문가는 국가 단위 합의보다 도시 차원의 실행이 더 빠르게 성과를 낼 수 있다는 점에서 의미가 크다고 평가했다."
+    ]
+  },
+  {
+    id: "decentralization-bill",
+    cat: "politics", catName: "정치",
+    kicker: "국회",
+    title: "국회, 지방분권 강화 법안 본회의 통과",
+    dek: "지역 균형 발전을 위한 핵심 법안이 여야 합의로 처리됐다. 시행은 내년 1월부터.",
+    author: "한지원", date: "2026-05-30", featured: true,
+    body: [
+      "지방자치단체의 자율 권한을 확대하는 지방분권 강화 법안이 국회 본회의를 통과했다. 여야는 막판 조율 끝에 합의 처리에 이르렀다.",
+      "법안은 지방정부의 재정 권한과 조직 운영의 자율성을 넓히는 내용을 담고 있다. 지역 현안에 대한 결정권이 한층 강화될 전망이다.",
+      "시행은 내년 1월부터다. 일선 지자체들은 환영의 뜻을 밝히면서도 재원 확보 방안이 함께 마련돼야 한다고 주문했다."
+    ]
+  },
+  {
+    id: "songdo-art-fair",
+    cat: "culture", catName: "문화",
+    kicker: "전시",
+    title: "송도 아트페어 개막… 관람객 20만 돌파",
+    dek: "국내외 작가 200여 명이 참여한 현대미술 축제가 역대 최대 규모로 열렸다.",
+    author: "윤소라", date: "2026-05-26", featured: true,
+    body: [
+      "송도컨벤시아에서 열린 현대미술 축제가 닷새 만에 누적 관람객 20만 명을 넘어섰다. 역대 최대 규모다.",
+      "국내외 작가 200여 명의 회화·조각·미디어 작품이 전시됐다. 신진 작가를 소개하는 특별관에는 젊은 관람객의 발길이 이어졌다.",
+      "주최 측은 지역 문화 인프라가 성숙해지면서 대형 미술 행사를 안정적으로 치를 수 있게 됐다고 설명했다."
+    ]
+  },
+  {
+    id: "incheon-club-home",
+    cat: "sports", catName: "스포츠",
+    kicker: "프로축구",
+    title: "인천 연고 구단, 시즌 첫 홈경기 매진",
+    dek: "새 시즌 개막전이 매진을 기록하며 지역 팬들의 뜨거운 성원을 받았다.",
+    author: "강태민", date: "2026-05-25", featured: true,
+    body: [
+      "인천을 연고로 하는 프로축구단의 시즌 첫 홈경기가 매진을 기록했다. 경기장은 개막 전부터 홈 팬들로 가득 찼다.",
+      "구단은 올 시즌 유소년 육성과 지역 연계 프로그램을 대폭 강화했다고 밝혔다. 관중석 곳곳에서 가족 단위 관람객이 눈에 띄었다.",
+      "감독은 경기 후 인터뷰에서 팬들의 성원이 선수단에 큰 힘이 된다며 좋은 성적으로 보답하겠다고 말했다."
+    ]
+  },
+
+  /* ── 경제 추가 ── */
+  { id: "chip-export-up", cat: "economy", catName: "경제", kicker: "수출", title: "반도체 수출 3개월 연속 증가… 회복 신호 뚜렷", dek: "주력 품목인 반도체 수출이 석 달 연속 늘며 경기 회복 기대를 키우고 있다.", author: "이도현", date: "2026-05-24", body: ["반도체 수출이 3개월 연속 증가세를 이어갔다. 메모리 가격 회복과 인공지능 수요 확대가 맞물린 결과로 분석된다.", "업계는 하반기에도 수출 호조가 이어질 것으로 기대하고 있다. 다만 글로벌 수요 둔화 가능성은 변수로 남아 있다."] },
+  { id: "startup-valley-1tn", cat: "economy", catName: "경제", kicker: "투자", title: "송도 스타트업 밸리, 올해 투자 유치 1조 원 돌파", dek: "송도 스타트업 단지의 누적 투자 유치액이 처음으로 1조 원을 넘어섰다.", author: "박지현", date: "2026-05-23", body: ["송도 스타트업 밸리에 입주한 기업들의 올해 누적 투자 유치액이 1조 원을 돌파했다. 바이오·인공지능·로보틱스 분야가 투자를 주도했다.", "지자체는 후속 투자와 인재 유입을 위한 지원책을 확대하겠다고 밝혔다."] },
+  { id: "fx-stable", cat: "economy", catName: "경제", kicker: "외환", title: "원·달러 환율 안정세… 무역수지 흑자 전환", dek: "환율이 안정되며 무역수지가 흑자로 돌아섰다.", author: "이도현", date: "2026-05-22", body: ["원·달러 환율이 안정세를 보이면서 수출 기업의 채산성이 개선됐다. 무역수지는 여러 달 만에 흑자로 전환했다.", "전문가들은 환율 안정이 물가에도 긍정적으로 작용할 것으로 내다봤다."] },
+  { id: "ev-2m", cat: "economy", catName: "경제", kicker: "산업", title: "국내 전기차 보급 200만 대 넘어서", dek: "국내 누적 전기차 등록 대수가 200만 대를 돌파했다.", author: "최은비", date: "2026-05-21", body: ["국내 전기차 누적 등록 대수가 200만 대를 넘어섰다. 충전 인프라 확충과 보조금 정책이 보급을 견인했다.", "완성차 업계는 보급형 모델 출시를 늘려 대중화에 속도를 낼 계획이다."] },
+  { id: "port-automation", cat: "economy", catName: "경제", kicker: "물류", title: "물류 자동화 투자 확대, 인천항 처리량 최대", dek: "자동화 설비 도입으로 인천항의 컨테이너 처리량이 역대 최대를 기록했다.", author: "강태민", date: "2026-05-20", body: ["인천항이 자동화 설비 투자에 힘입어 역대 최대 컨테이너 처리량을 기록했다. 하역 속도와 정확도가 크게 향상됐다.", "항만공사는 친환경 설비 전환도 병행해 효율과 지속가능성을 함께 잡겠다고 밝혔다."] },
+
+  /* ── 국제 추가 ── */
+  { id: "eu-digital-rule", cat: "world", catName: "국제", kicker: "규제", title: "유럽연합, 디지털 규제안 최종 합의", dek: "유럽연합이 플랫폼 규제를 강화하는 디지털 법안에 최종 합의했다.", author: "정세훈", date: "2026-05-24", body: ["유럽연합이 대형 플랫폼 기업의 책임을 강화하는 디지털 규제안에 최종 합의했다. 데이터 투명성과 이용자 보호가 핵심이다.", "글로벌 기업들은 규제 대응을 위한 체계 정비에 나설 것으로 보인다."] },
+  { id: "climate-summit", cat: "world", catName: "국제", kicker: "기후", title: "기후 정상회의, 재생에너지 전환 가속 합의", dek: "주요국이 재생에너지 전환 속도를 높이기로 합의했다.", author: "정세훈", date: "2026-05-23", body: ["기후 정상회의에 참가한 주요국 정상들이 재생에너지 전환을 가속하기로 합의했다. 구체적 이행 점검 체계도 도입된다.", "환경단체는 합의를 환영하면서도 실질적 재정 지원이 뒤따라야 한다고 강조했다."] },
+  { id: "asia-trade", cat: "world", catName: "국제", kicker: "통상", title: "아시아 교역 회복세… 역내 협력 강화", dek: "아시아 역내 교역이 회복세를 보이며 협력 논의가 활발해지고 있다.", author: "한지원", date: "2026-05-22", body: ["아시아 역내 교역이 회복세로 돌아서면서 무역·투자 협력 논의가 활발해지고 있다. 공급망 다변화가 주요 의제로 떠올랐다.", "전문가들은 역내 협력이 외부 충격에 대한 완충 역할을 할 수 있다고 분석했다."] },
+  { id: "space-project", cat: "world", catName: "국제", kicker: "과학", title: "우주 탐사 국제 공동 프로젝트 본격 가동", dek: "여러 국가가 참여하는 우주 탐사 공동 프로젝트가 본격 시작됐다.", author: "윤소라", date: "2026-05-21", body: ["여러 국가의 우주 기관이 참여하는 심우주 탐사 공동 프로젝트가 본격 가동에 들어갔다. 관측 장비와 데이터가 공유된다.", "참여 기관들은 비용을 분담하고 성과를 공동으로 활용하기로 했다."] },
+  { id: "ai-safety", cat: "world", catName: "국제", kicker: "기술", title: "세계 주요국, 인공지능 안전 기준 논의 착수", dek: "주요국이 인공지능 안전 기준 마련을 위한 국제 논의에 들어갔다.", author: "이도현", date: "2026-05-20", body: ["세계 주요국이 인공지능의 안전성과 신뢰성을 확보하기 위한 국제 기준 논의에 착수했다. 위험 평가와 투명성 확보가 우선 과제로 다뤄진다.", "참가국들은 혁신을 저해하지 않으면서도 위험을 관리하는 균형점을 찾는 데 합의했다."] },
+
+  /* ── 정치 추가 ── */
+  { id: "local-budget", cat: "politics", catName: "정치", kicker: "예산", title: "지방재정 자율성 확대 방안 발표", dek: "정부가 지방정부의 재정 운용 자율성을 넓히는 방안을 내놨다.", author: "한지원", date: "2026-05-22", body: ["정부가 지방정부의 재정 운용 자율성을 확대하는 방안을 발표했다. 지방분권 강화 법안의 후속 조치다.", "지자체들은 환영하면서도 안정적 재원 확보가 관건이라고 입을 모았다."] },
+  { id: "election-reform", cat: "politics", catName: "정치", kicker: "제도", title: "선거제도 개편 논의 재점화", dek: "국회에서 선거제도 개편 논의가 다시 시작됐다.", author: "한지원", date: "2026-05-19", body: ["국회에서 선거제도 개편을 둘러싼 논의가 재점화됐다. 비례성과 대표성을 높이는 방안이 쟁점이다.", "여야는 공론화 과정을 거쳐 합의안을 마련하겠다고 밝혔다."] },
+
+  /* ── 문화 추가 ── */
+  { id: "library-open", cat: "culture", catName: "문화", kicker: "공간", title: "송도 복합문화도서관 개관", dek: "전시·공연·독서를 한 공간에서 즐기는 복합문화도서관이 문을 열었다.", author: "윤소라", date: "2026-05-22", body: ["송도에 전시장과 공연장을 함께 갖춘 복합문화도서관이 개관했다. 시민 누구나 자유롭게 이용할 수 있다.", "운영 측은 지역 예술가와 협업 프로그램을 정기적으로 운영할 계획이다."] },
+  { id: "film-festival", cat: "culture", catName: "문화", kicker: "영화", title: "인천 독립영화제, 관객상 수상작 공개", dek: "올해 인천 독립영화제 관객상 수상작이 발표됐다.", author: "윤소라", date: "2026-05-18", body: ["인천 독립영화제가 막을 내리며 관객상 수상작을 공개했다. 지역을 배경으로 한 작품들이 호평을 받았다.", "주최 측은 신진 감독 발굴을 위한 지원을 이어가겠다고 밝혔다."] },
+
+  /* ── 스포츠 추가 ── */
+  { id: "marathon", cat: "sports", catName: "스포츠", kicker: "마라톤", title: "송도 국제마라톤 2만 명 참가", dek: "송도 국제마라톤에 국내외 2만 명이 참가했다.", author: "강태민", date: "2026-05-22", body: ["송도 일대에서 열린 국제마라톤에 국내외 참가자 2만 명이 몰렸다. 도심과 해안을 잇는 코스가 호평을 받았다.", "주최 측은 안전 관리와 참가자 편의를 더 강화하겠다고 밝혔다."] },
+  { id: "youth-baseball", cat: "sports", catName: "스포츠", kicker: "야구", title: "유소년 야구 리그 창설", dek: "인천 지역 유소년 야구 리그가 새롭게 창설됐다.", author: "강태민", date: "2026-05-17", body: ["인천 지역 초·중학생을 대상으로 한 유소년 야구 리그가 창설됐다. 여러 학교와 클럽팀이 참가한다.", "구단과 지자체는 생활체육 저변 확대를 기대한다고 밝혔다."] },
+
+  /* ── 오피니언 ── */
+  { id: "op-city", cat: "opinion", catName: "오피니언", kicker: "칼럼", title: "도시의 미래는 사람의 이야기로 완성된다", dek: "김도윤 논설위원", author: "김도윤", date: "2026-05-30", quote: "도시의 미래는 건물이 아니라 그 안에 사는 사람들의 이야기로 완성된다.", body: ["새 건물이 들어서고 도로가 넓어지는 것만으로 좋은 도시가 되지는 않는다. 도시는 그 안에서 살아가는 사람들의 일상과 관계로 채워질 때 비로소 의미를 갖는다.", "송도가 빠르게 성장하는 지금, 우리가 던져야 할 질문은 단순하다. 이 도시는 누구를 위한 공간인가. 화려한 외형 뒤에 사람의 자리가 있는지를 끊임없이 살펴야 한다."] },
+  { id: "op-journalism", cat: "opinion", catName: "오피니언", kicker: "사설", title: "변하는 기술, 변하지 않는 저널리즘의 원칙", dek: "이서연 편집국장", author: "이서연", date: "2026-05-29", quote: "기술은 빠르게 변하지만, 좋은 저널리즘의 원칙은 변하지 않는다.", body: ["뉴스를 전달하는 방식은 끊임없이 바뀐다. 종이에서 화면으로, 화면에서 알고리즘으로 옮겨 왔다. 그러나 사실을 정확히 확인하고 공정하게 전한다는 원칙은 변하지 않는다.", "송도앤피플은 새로운 도구를 적극적으로 받아들이되, 독자의 신뢰라는 근본을 흔들지 않겠다."] },
+  { id: "op-local", cat: "opinion", catName: "오피니언", kicker: "칼럼", title: "지역의 목소리에 귀 기울일 때", dek: "정민호 객원논설위원", author: "정민호", date: "2026-05-28", quote: "지역의 목소리에 귀 기울일 때, 비로소 진짜 공론장이 열린다.", body: ["중앙의 시선만으로는 지역을 온전히 이해할 수 없다. 가장 가까운 곳에서 살아가는 주민들의 목소리가 공론의 출발점이 되어야 한다.", "지역 언론의 역할은 바로 그 목소리를 모으고 전하는 데 있다. 그것이 작아 보일지라도, 건강한 공동체의 토대가 된다."] }
+];
+
+  </script>
+  <script>
+/* SONGDO & PEOPLE — 클라이언트 라우터
+   해시 기반 라우팅으로 다중 페이지를 단일 파일에서 구현.
+   GitHub Pages 등 정적 호스팅에서 서버 설정 없이 작동. */
+(function () {
+  "use strict";
+
+  var ARTICLES = window.ARTICLES || [];
+  var CATEGORIES = window.CATEGORIES || [];
+  var view = document.getElementById("js-view");
+
+  /* ---------- 유틸 ---------- */
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function fmtDate(iso) {
+    var d = new Date(iso + "T00:00:00");
+    if (isNaN(d)) return iso;
+    return d.getFullYear() + "년 " + (d.getMonth() + 1) + "월 " + d.getDate() + "일";
+  }
+  function byId(id) { return ARTICLES.filter(function (a) { return a.id === id; })[0]; }
+  function inCat(slug) { return ARTICLES.filter(function (a) { return a.cat === slug; }); }
+  function catName(slug) {
+    var c = CATEGORIES.filter(function (x) { return x.slug === slug; })[0];
+    return c ? c.name : slug;
+  }
+
+  /* 이미지 플레이스홀더 (정직한 자리표시 — 람스) */
+  function ph(variant) {
+    if (variant === "lead") {
+      return '<svg class="ph ph--lead" viewBox="0 0 800 460" role="img" aria-label="기사 대표 이미지 자리"><rect width="800" height="460"/><line x1="60" y1="400" x2="240" y2="180"/><line x1="240" y1="180" x2="420" y2="300"/><line x1="420" y1="300" x2="600" y2="120"/><line x1="600" y1="120" x2="740" y2="220"/><circle cx="600" cy="120" r="6"/><circle cx="240" cy="180" r="6"/></svg>';
+    }
+    var v = (variant || 0) % 3;
+    var inner = [
+      '<line x1="40" y1="180" x2="160" y2="80"/><line x1="160" y1="80" x2="280" y2="150"/><line x1="280" y1="150" x2="360" y2="70"/>',
+      '<circle cx="200" cy="120" r="60"/><line x1="80" y1="120" x2="140" y2="120"/><line x1="260" y1="120" x2="320" y2="120"/>',
+      '<line x1="60" y1="60" x2="60" y2="180"/><line x1="140" y1="100" x2="140" y2="180"/><line x1="220" y1="40" x2="220" y2="180"/><line x1="300" y1="130" x2="300" y2="180"/>'
+    ][v];
+    return '<svg class="ph" viewBox="0 0 400 240" role="img" aria-label="이미지 자리"><rect width="400" height="240"/>' + inner + '</svg>';
+  }
+
+  /* 카드 컴포넌트 */
+  function card(a, i) {
+    return '<article class="card">' +
+      '<figure class="card__figure"><a href="#/article/' + a.id + '">' + ph(i) + '</a></figure>' +
+      '<span class="kicker kicker--sm">' + esc(a.catName) + '</span>' +
+      '<h3 class="card__title"><a href="#/article/' + a.id + '">' + esc(a.title) + '</a></h3>' +
+      '<p class="card__dek">' + esc(a.dek) + '</p>' +
+      '</article>';
+  }
+
+  /* ---------- 페이지: 홈 ---------- */
+  function renderHome() {
+    var lead = ARTICLES.filter(function (a) { return a.lead; })[0] || ARTICLES[0];
+    var feat = ARTICLES.filter(function (a) { return a.featured && a.id !== lead.id; });
+    var rail = feat.slice(0, 3);
+    var gridIds = ["decentralization-bill", "songdo-art-fair", "incheon-club-home"];
+    var grid = gridIds.map(byId).filter(Boolean);
+    var econ = inCat("economy").slice(0, 5);
+    var world = inCat("world").slice(0, 5);
+    var ops = inCat("opinion").slice(0, 3);
+
+    var railHtml = rail.map(function (a, i) {
+      var last = i === rail.length - 1 ? " rail__item--last" : "";
+      return '<article class="rail__item' + last + '">' +
+        '<span class="kicker kicker--sm">' + esc(a.catName) + '</span>' +
+        '<h2 class="rail__title"><a href="#/article/' + a.id + '">' + esc(a.title) + '</a></h2>' +
+        '<p class="rail__dek">' + esc(a.dek) + '</p></article>';
+    }).join("");
+
+    var listHtml = function (arr) {
+      return arr.map(function (a, i) {
+        var last = i === arr.length - 1 ? " list__item--last" : "";
+        return '<li class="list__item' + last + '"><a href="#/article/' + a.id + '">' + esc(a.title) + '</a></li>';
+      }).join("");
+    };
+
+    var opHtml = ops.map(function (a, i) {
+      var last = i === ops.length - 1 ? " op--last" : "";
+      return '<article class="op' + last + '">' +
+        '<blockquote class="op__quote"><a href="#/article/' + a.id + '">' + esc(a.quote || a.title) + '</a></blockquote>' +
+        '<p class="op__author">' + esc(a.author) + ' · ' + esc(a.kicker) + '</p></article>';
+    }).join("");
+
+    view.innerHTML =
+      '<section class="hero" aria-label="주요 기사">' +
+        '<article class="lead">' +
+          '<span class="kicker">' + esc(lead.kicker) + '</span>' +
+          '<h1 class="lead__title"><a href="#/article/' + lead.id + '">' + esc(lead.title) + '</a></h1>' +
+          '<p class="lead__dek">' + esc(lead.dek) + '</p>' +
+          '<figure class="lead__figure"><a href="#/article/' + lead.id + '">' + ph("lead") + '</a>' +
+          '<figcaption class="figcaption">' + esc(lead.figcaption || "") + '</figcaption></figure>' +
+          '<p class="byline">' + esc(lead.author) + ' 기자 · ' + fmtDate(lead.date) + '</p>' +
+        '</article>' +
+        '<aside class="rail" aria-label="보조 기사">' + railHtml + '</aside>' +
+      '</section>' +
+
+      '<section class="section" aria-label="주요 뉴스">' +
+        '<div class="section__head"><h2 class="section__title">주요 뉴스</h2></div>' +
+        '<div class="grid grid--3">' + grid.map(card).join("") + '</div>' +
+      '</section>' +
+
+      '<section class="section split" aria-label="경제와 국제">' +
+        '<div class="split__col"><div class="section__head"><h2 class="section__title">경제</h2>' +
+          '<a href="#/category/economy" class="section__more">전체 보기</a></div>' +
+          '<ol class="list">' + listHtml(econ) + '</ol></div>' +
+        '<div class="split__col"><div class="section__head"><h2 class="section__title">국제</h2>' +
+          '<a href="#/category/world" class="section__more">전체 보기</a></div>' +
+          '<ol class="list">' + listHtml(world) + '</ol></div>' +
+      '</section>' +
+
+      '<section class="section opinion" aria-label="오피니언">' +
+        '<div class="section__head"><h2 class="section__title">오피니언</h2>' +
+        '<a href="#/category/opinion" class="section__more">전체 보기</a></div>' +
+        '<div class="grid grid--3">' + opHtml + '</div>' +
+      '</section>';
+  }
+
+  /* ---------- 페이지: 카테고리 ---------- */
+  function renderCategory(slug) {
+    var name = catName(slug);
+    var arts = inCat(slug);
+    if (!arts.length) { return renderNotFound("‘" + name + "’ 섹션에 아직 기사가 없습니다."); }
+
+    var top = arts[0];
+    var rest = arts.slice(1);
+
+    var topHtml = '<article class="cat-lead">' +
+      '<figure class="cat-lead__figure"><a href="#/article/' + top.id + '">' + ph("lead") + '</a></figure>' +
+      '<div class="cat-lead__body"><span class="kicker">' + esc(top.kicker) + '</span>' +
+      '<h2 class="cat-lead__title"><a href="#/article/' + top.id + '">' + esc(top.title) + '</a></h2>' +
+      '<p class="cat-lead__dek">' + esc(top.dek) + '</p>' +
+      '<p class="byline">' + esc(top.author) + ' 기자 · ' + fmtDate(top.date) + '</p></div></article>';
+
+    var restHtml = rest.length
+      ? '<div class="grid grid--3">' + rest.map(card).join("") + '</div>'
+      : '';
+
+    view.innerHTML =
+      '<nav class="crumb"><a href="#/">홈</a><span>›</span><strong>' + esc(name) + '</strong></nav>' +
+      '<header class="page-head"><h1 class="page-head__title">' + esc(name) + '</h1>' +
+      '<p class="page-head__count">' + arts.length + '건의 기사</p></header>' +
+      topHtml +
+      (restHtml ? '<section class="section">' + restHtml + '</section>' : '');
+  }
+
+  /* ---------- 페이지: 기사 상세 ---------- */
+  function renderArticle(id) {
+    var a = byId(id);
+    if (!a) { return renderNotFound("요청하신 기사를 찾을 수 없습니다."); }
+
+    var bodyHtml = (a.body || []).map(function (p) {
+      return '<p class="article__p">' + esc(p) + '</p>';
+    }).join("");
+
+    var related = inCat(a.cat).filter(function (x) { return x.id !== a.id; }).slice(0, 3);
+    var relHtml = related.length ? (
+      '<section class="section related"><div class="section__head"><h2 class="section__title">' +
+      esc(a.catName) + ' 더보기</h2></div><div class="grid grid--3">' +
+      related.map(card).join("") + '</div></section>'
+    ) : "";
+
+    var quoteOpen = a.quote ? '<p class="article__lead-quote">“' + esc(a.quote) + '”</p>' : '';
+
+    view.innerHTML =
+      '<nav class="crumb"><a href="#/">홈</a><span>›</span>' +
+      '<a href="#/category/' + a.cat + '">' + esc(a.catName) + '</a><span>›</span><strong>기사</strong></nav>' +
+      '<article class="article">' +
+        '<span class="kicker">' + esc(a.kicker) + '</span>' +
+        '<h1 class="article__title">' + esc(a.title) + '</h1>' +
+        '<p class="article__dek">' + esc(a.dek) + '</p>' +
+        '<div class="article__meta"><span>' + esc(a.author) + ' 기자</span>' +
+        '<span class="article__meta-sep">·</span><time>' + fmtDate(a.date) + '</time></div>' +
+        '<figure class="article__figure">' + ph("lead") +
+        (a.figcaption ? '<figcaption class="figcaption">' + esc(a.figcaption) + '</figcaption>' : '') +
+        '</figure>' +
+        quoteOpen +
+        '<div class="article__body">' + bodyHtml + '</div>' +
+        '<p class="article__credit">© SONGDO &amp; PEOPLE · 무단 전재 및 재배포 금지</p>' +
+      '</article>' +
+      relHtml;
+
+    document.title = a.title + " — SONGDO & PEOPLE";
+  }
+
+  /* ---------- 페이지: 검색 ---------- */
+  function renderSearch(q) {
+    q = (q || "").trim();
+    var results = [];
+    if (q) {
+      var lq = q.toLowerCase();
+      results = ARTICLES.filter(function (a) {
+        return (a.title + " " + a.dek + " " + (a.body || []).join(" ") + " " + a.catName)
+          .toLowerCase().indexOf(lq) !== -1;
+      });
+    }
+    var resHtml = results.length
+      ? '<div class="grid grid--3">' + results.map(card).join("") + '</div>'
+      : '<p class="empty">' + (q ? '‘' + esc(q) + '’에 대한 검색 결과가 없습니다.' : '검색어를 입력하세요.') + '</p>';
+
+    view.innerHTML =
+      '<header class="page-head"><h1 class="page-head__title">검색</h1>' +
+      (q ? '<p class="page-head__count">‘' + esc(q) + '’ · ' + results.length + '건</p>' : '') +
+      '</header><section class="section">' + resHtml + '</section>';
+  }
+
+  /* ---------- 페이지: 정적 (구독/소개) ---------- */
+  function renderStatic(kind) {
+    var data = {
+      subscribe: { t: "구독 안내", p: ["송도앤피플은 신뢰받는 지역·국제 저널리즘을 지향합니다.", "정기 구독을 통해 심층 기사와 뉴스레터를 받아보실 수 있습니다.", "본 페이지는 데모용으로, 실제 결제 기능은 연결되어 있지 않습니다."] },
+      about: { t: "회사 소개", p: ["송도앤피플은 인천 송도를 기반으로 지역과 세계를 잇는 뉴스를 전합니다.", "사실 확인과 공정 보도라는 원칙을 지키며, 독자의 신뢰를 최우선 가치로 삼습니다.", "제보·광고·채용 문의는 본 페이지를 통해 안내됩니다. (데모)"] }
+    }[kind] || { t: "페이지", p: ["준비 중입니다."] };
+
+    view.innerHTML =
+      '<nav class="crumb"><a href="#/">홈</a><span>›</span><strong>' + esc(data.t) + '</strong></nav>' +
+      '<header class="page-head"><h1 class="page-head__title">' + esc(data.t) + '</h1></header>' +
+      '<div class="article__body static">' + data.p.map(function (p) {
+        return '<p class="article__p">' + esc(p) + '</p>';
+      }).join("") + '</div>';
+  }
+
+  function renderNotFound(msg) {
+    view.innerHTML =
+      '<header class="page-head"><h1 class="page-head__title">페이지를 찾을 수 없습니다</h1></header>' +
+      '<p class="empty">' + esc(msg || "요청하신 페이지가 존재하지 않습니다.") + '</p>' +
+      '<p class="empty"><a class="backlink" href="#/">← 홈으로 돌아가기</a></p>';
+  }
+
+  /* ---------- 라우터 ---------- */
+  function parseQuery(str) {
+    var out = {};
+    (str || "").split("&").forEach(function (kv) {
+      if (!kv) return;
+      var p = kv.split("=");
+      out[decodeURIComponent(p[0])] = decodeURIComponent(p[1] || "");
+    });
+    return out;
+  }
+
+  function router() {
+    var hash = location.hash.replace(/^#/, "");
+    if (!hash || hash === "/") hash = "/";
+    var qIndex = hash.indexOf("?");
+    var query = "";
+    if (qIndex !== -1) { query = hash.slice(qIndex + 1); hash = hash.slice(0, qIndex); }
+    var parts = hash.split("/").filter(Boolean); // ["category","economy"]
+
+    document.title = "SONGDO & PEOPLE — 송도앤피플";
+    var activeCat = "home";
+
+    if (parts.length === 0) {
+      renderHome();
+    } else if (parts[0] === "category" && parts[1]) {
+      renderCategory(parts[1]); activeCat = parts[1];
+    } else if (parts[0] === "article" && parts[1]) {
+      var art = byId(parts[1]); if (art) activeCat = art.cat;
+      renderArticle(parts[1]);
+    } else if (parts[0] === "search") {
+      renderSearch(parseQuery(query).q); activeCat = "search";
+    } else if (parts[0] === "subscribe") {
+      renderStatic("subscribe"); activeCat = "subscribe";
+    } else if (parts[0] === "about") {
+      renderStatic("about"); activeCat = "about";
+    } else {
+      renderNotFound();
+    }
+
+    setActiveNav(activeCat);
+    closeMobileNav();
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  /* ---------- 내비게이션 빌드 ---------- */
+  function buildNav() {
+    var ul = document.getElementById("js-nav-list");
+    ul.innerHTML = CATEGORIES.map(function (c) {
+      var href = c.slug === "home" ? "#/" : "#/category/" + c.slug;
+      return '<li><a href="' + href + '" class="nav__link" data-cat="' + c.slug + '">' + esc(c.name) + '</a></li>';
+    }).join("");
+  }
+  function setActiveNav(slug) {
+    var links = document.querySelectorAll(".nav__link");
+    links.forEach(function (l) {
+      l.classList.toggle("is-active", l.getAttribute("data-cat") === slug);
+    });
+  }
+
+  /* ---------- 속보 티커 ---------- */
+  function buildTicker() {
+    var items = ARTICLES.filter(function (a) { return a.featured; }).slice(0, 3);
+    var html = items.map(function (a) {
+      return '<a class="ticker__item" href="#/article/' + a.id + '">' + esc(a.title) + '</a>';
+    }).join("");
+    document.getElementById("js-ticker").innerHTML = html + html; // 무한 루프용 2배
+  }
+
+  /* ---------- 검색 패널 ---------- */
+  function setupSearch() {
+    var bar = document.getElementById("js-searchbar");
+    var input = document.getElementById("js-search-input");
+    var open = function () { bar.hidden = false; input.focus(); };
+    var close = function () { bar.hidden = true; };
+    var go = function () {
+      var q = input.value.trim();
+      close();
+      location.hash = "#/search?q=" + encodeURIComponent(q);
+    };
+    document.getElementById("js-search-btn").addEventListener("click", open);
+    document.getElementById("js-search-close").addEventListener("click", close);
+    document.getElementById("js-search-go").addEventListener("click", go);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") go();
+      if (e.key === "Escape") close();
+    });
+  }
+
+  /* ---------- 모바일 메뉴 ---------- */
+  function setupMobileNav() {
+    var toggle = document.getElementById("js-nav-toggle");
+    var nav = document.getElementById("js-nav");
+    toggle.addEventListener("click", function () {
+      var openNow = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", openNow ? "true" : "false");
+      toggle.setAttribute("aria-label", openNow ? "메뉴 닫기" : "메뉴 열기");
+    });
+  }
+  function closeMobileNav() {
+    var nav = document.getElementById("js-nav");
+    var toggle = document.getElementById("js-nav-toggle");
+    nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "메뉴 열기");
+  }
+
+  /* ---------- 날짜 ---------- */
+  function setDate() {
+    var el = document.getElementById("js-date");
+    var days = ["일", "월", "화", "수", "목", "금", "토"];
+    var n = new Date();
+    el.textContent = n.getFullYear() + "년 " + (n.getMonth() + 1) + "월 " + n.getDate() + "일 " + days[n.getDay()] + "요일";
+  }
+
+  /* ---------- 부트 ---------- */
+  setDate();
+  buildNav();
+  buildTicker();
+  setupSearch();
+  setupMobileNav();
+  window.addEventListener("hashchange", router);
+  router();
+})();
+
+  </script>
+</body>
+</html>
