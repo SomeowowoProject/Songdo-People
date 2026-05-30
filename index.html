@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SONGDO &amp; PEOPLE — 송도앤피플</title>
+  <meta name="description" content="송도앤피플 — 신뢰받는 지역·국제 뉴스. 정치, 경제, 사회, 국제, 문화, 스포츠, 오피니언.">
+  <meta name="theme-color" content="#0D1B2A">
+  <!-- Open Graph -->
+  <meta property="og:title" content="SONGDO &amp; PEOPLE">
+  <meta property="og:description" content="신뢰받는 지역·국제 뉴스">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   SONGDO & PEOPLE — Stylesheet
+   Design grammar: Dieter Rams ("Weniger, aber besser")
+   - 정직(honest): 장식 없음, 그림자/그라데이션/둥근 모서리 없음
+   - 절제(as little design as possible): 위계는 타이포·여백·괘선으로만
+   - 단 3색: Navy / Paper / Red  (그레이 미사용)
+   - 위계용 회색 대신 Navy 단일 색상의 투명도(tint)만 사용
+   ============================================================ */
+
+:root {
+  /* === 3색 팔레트 (전부) === */
+  --navy:  #0D1B2A;   /* 텍스트 · 구조 · 푸터 */
+  --paper: #FAFAF8;   /* 배경 */
+  --red:   #C8102E;   /* 유일한 강조색 */
+
+  /* Navy 단일 색상의 투명도 — 새로운 '색'이 아닌 위계 도구 */
+  --navy-70: rgba(13, 27, 42, 0.70);
+  --navy-55: rgba(13, 27, 42, 0.55);
+  --navy-14: rgba(13, 27, 42, 0.14);  /* 괘선 */
+  --navy-08: rgba(13, 27, 42, 0.08);  /* 연한 면 */
+
+  /* 타이포 */
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans:  "Helvetica Neue", Helvetica, Arial, "Apple SD Gothic Neo",
+           "Malgun Gothic", "맑은 고딕", sans-serif;
+
+  /* 모듈러 간격 (8px 그리드) */
+  --gap: 24px;
+  --max: 1200px;
+}
+
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--paper);
+  color: var(--navy);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+
+.container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+.skip-link {
+  position: absolute; left: -999px; top: 0; background: var(--navy);
+  color: var(--paper); padding: 10px 16px; z-index: 100; font-size: 13px;
+}
+.skip-link:focus { left: 0; }
+
+/* ============ ① 유틸리티 바 ============ */
+.utility { border-bottom: 1px solid var(--navy-14); }
+.utility__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 38px; font-size: 12px; letter-spacing: 0.04em;
+}
+.utility__date { color: var(--navy-70); text-transform: uppercase; }
+.utility__right { display: flex; align-items: center; gap: 20px; }
+.utility__weather { color: var(--navy-70); }
+.utility__link { color: var(--navy); position: relative; }
+.utility__link:hover { color: var(--red); }
+.utility__link--accent { color: var(--red); font-weight: 700; }
+
+/* ============ ② 마스트헤드 ============ */
+.masthead { border-bottom: 1px solid var(--navy); }
+.masthead__inner {
+  display: grid; grid-template-columns: 40px 1fr 40px; align-items: center;
+  padding: 26px 24px;
+}
+.logo {
+  font-family: var(--serif); color: var(--navy);
+  text-align: center; line-height: 0.92; grid-column: 2;
+  display: flex; align-items: baseline; justify-content: center;
+  gap: 0.28em; flex-wrap: wrap;
+}
+.logo__line {
+  font-weight: 600; font-size: clamp(30px, 6vw, 58px);
+  letter-spacing: 0.04em;
+  /* small-caps 느낌: 로고 가이드의 대문자 세리프 재현 */
+  font-variant: normal; text-transform: uppercase;
+}
+.logo__amp {
+  font-style: italic; font-weight: 500;
+  font-size: clamp(26px, 5vw, 50px); color: var(--navy);
+}
+
+/* 메뉴 토글 (모바일) */
+.nav-toggle {
+  display: none; flex-direction: column; gap: 5px; background: none;
+  border: 0; cursor: pointer; padding: 6px; grid-column: 1;
+}
+.nav-toggle span { width: 22px; height: 1.5px; background: var(--navy); transition: .25s; }
+.nav-toggle[aria-expanded="true"] span:nth-child(1){ transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3){ transform: translateY(-6.5px) rotate(-45deg); }
+
+.search-btn {
+  background: none; border: 0; color: var(--navy); cursor: pointer;
+  grid-column: 3; justify-self: end; display: flex;
+}
+.search-btn:hover { color: var(--red); }
+
+/* ============ ③ 내비게이션 ============ */
+.nav { border-bottom: 1px solid var(--navy-14); }
+.nav__list { display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; }
+.nav__link {
+  display: block; padding: 13px 18px; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.06em; color: var(--navy); position: relative;
+}
+.nav__link::after {
+  content: ""; position: absolute; left: 18px; right: 18px; bottom: 8px;
+  height: 1.5px; background: var(--red); transform: scaleX(0);
+  transform-origin: left; transition: transform .22s ease;
+}
+.nav__link:hover::after, .nav__link.is-active::after { transform: scaleX(1); }
+.nav__link.is-active { font-weight: 700; }
+
+/* ============ ④ 속보 티커 ============ */
+.ticker { border-bottom: 1px solid var(--navy-14); background: var(--paper); }
+.ticker__inner { display: flex; align-items: center; height: 44px; gap: 0; }
+.ticker__label {
+  flex: 0 0 auto; background: var(--red); color: var(--paper);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+  padding: 5px 14px; margin-right: 20px; text-transform: uppercase;
+}
+.ticker__viewport { overflow: hidden; flex: 1; }
+.ticker__track {
+  display: inline-flex; gap: 56px; white-space: nowrap;
+  animation: ticker 38s linear infinite; will-change: transform;
+}
+.ticker:hover .ticker__track { animation-play-state: paused; }
+.ticker__item { font-size: 14px; color: var(--navy); position: relative; }
+.ticker__item::before {
+  content: ""; position: absolute; left: -28px; top: 50%;
+  width: 3px; height: 3px; background: var(--red); transform: translateY(-50%);
+}
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker__track { animation: none; } }
+
+/* ============ 공통: 키커 / 섹션 헤드 ============ */
+.kicker {
+  display: inline-block; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--red);
+  margin-bottom: 12px;
+}
+.kicker--sm { font-size: 11px; margin-bottom: 8px; }
+.byline { font-size: 12px; color: var(--navy-55); letter-spacing: 0.03em; margin-top: 18px; }
+
+.section { padding: 48px 0; border-top: 1px solid var(--navy-14); }
+.section__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 28px;
+}
+.section__title {
+  font-family: var(--serif); font-weight: 700; font-size: 24px;
+  letter-spacing: 0.01em;
+}
+.section__more { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--navy-70); }
+.section__more:hover { color: var(--red); }
+
+/* ============ ⑤ 히어로 ============ */
+.hero {
+  display: grid; grid-template-columns: 1.85fr 1fr; gap: 56px;
+  padding: 48px 0 8px;
+}
+.lead__title {
+  font-family: var(--serif); font-weight: 800;
+  font-size: clamp(34px, 5vw, 56px); line-height: 1.04;
+  letter-spacing: -0.01em; margin-bottom: 18px;
+}
+.lead__dek {
+  font-size: 19px; line-height: 1.55; color: var(--navy-70);
+  max-width: 60ch; margin-bottom: 28px;
+}
+.lead__figure { margin-top: 8px; }
+.figcaption { font-size: 12px; color: var(--navy-55); padding-top: 10px; letter-spacing: 0.02em; }
+
+.rail { border-left: 1px solid var(--navy-14); padding-left: 40px; }
+.rail__item { padding-bottom: 26px; margin-bottom: 26px; border-bottom: 1px solid var(--navy-14); }
+.rail__item--last { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.rail__title {
+  font-family: var(--serif); font-weight: 600; font-size: 22px;
+  line-height: 1.18; margin-bottom: 10px;
+}
+.rail__title a:hover { color: var(--red); }
+.rail__dek { font-size: 15px; line-height: 1.5; color: var(--navy-70); }
+
+/* ============ 이미지 플레이스홀더 (정직한 자리표시) ============ */
+.ph { width: 100%; height: auto; background: var(--navy-08); }
+.ph rect { fill: var(--navy-08); }
+.ph line, .ph circle { stroke: var(--navy); stroke-width: 1.5; fill: none; }
+
+/* ============ ⑥ 그리드 ============ */
+.grid { display: grid; gap: 40px; }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.card { border-top: 2px solid var(--navy); padding-top: 18px; }
+.card__figure { margin-bottom: 16px; }
+.card__title {
+  font-family: var(--serif); font-weight: 600; font-size: 21px;
+  line-height: 1.2; margin-bottom: 10px;
+}
+.card__title a:hover { color: var(--red); }
+.card__dek { font-size: 14px; line-height: 1.5; color: var(--navy-70); }
+
+/* ============ ⑦ 카테고리 분할 ============ */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.split .section__head { margin-bottom: 18px; }
+.list__item { border-bottom: 1px solid var(--navy-14); }
+.list__item--last { border-bottom: 0; }
+.list__item a {
+  display: block; padding: 16px 0; font-family: var(--serif);
+  font-size: 19px; font-weight: 500; line-height: 1.3;
+  position: relative; padding-left: 22px;
+}
+.list__item a::before {
+  content: ""; position: absolute; left: 0; top: 24px;
+  width: 8px; height: 1.5px; background: var(--red);
+}
+.list__item a:hover { color: var(--red); }
+
+/* ============ ⑧ 오피니언 ============ */
+.op { border-left: 2px solid var(--red); padding-left: 22px; }
+.op__quote {
+  font-family: var(--serif); font-style: italic; font-weight: 500;
+  font-size: 22px; line-height: 1.34; letter-spacing: -0.01em;
+}
+.op__author {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--navy-70); margin-top: 16px; text-transform: none;
+}
+
+/* ============ ⑨ 푸터 ============ */
+.footer { background: var(--navy); color: var(--paper); margin-top: 64px; }
+.footer__inner {
+  display: grid; grid-template-columns: 1.2fr 2fr; gap: 56px;
+  padding: 56px 24px 40px;
+}
+.logo--footer { justify-content: flex-start; }
+.logo--footer .logo__line, .logo--footer .logo__amp { color: var(--paper); font-size: 30px; }
+.logo--footer .logo__amp { font-size: 26px; }
+.footer__tagline { font-size: 13px; color: rgba(250,250,248,0.6); margin-top: 16px; letter-spacing: 0.04em; }
+.footer__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.footer__h {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--red);
+  padding-bottom: 14px; margin-bottom: 4px; border-bottom: 1px solid rgba(250,250,248,0.18);
+}
+.footer__col a {
+  display: block; padding: 7px 0; font-size: 14px;
+  color: rgba(250,250,248,0.82);
+}
+.footer__col a:hover { color: var(--paper); }
+.footer__bottom {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  padding: 22px 24px; border-top: 1px solid rgba(250,250,248,0.18);
+  font-size: 12px; color: rgba(250,250,248,0.6); letter-spacing: 0.02em;
+}
+
+/* ============ 반응형 ============ */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 36px; }
+  .rail { border-left: 0; padding-left: 0; border-top: 2px solid var(--navy); padding-top: 28px; }
+  .grid--3 { grid-template-columns: 1fr 1fr; }
+  .card--last { grid-column: 1 / -1; }
+  .split { grid-template-columns: 1fr; gap: 40px; }
+  .footer__inner { grid-template-columns: 1fr; gap: 36px; }
+}
+
+@media (max-width: 640px) {
+  .nav-toggle { display: flex; }
+  .masthead__inner { padding: 20px 24px; }
+  .nav { position: relative; }
+  .nav__list {
+    display: none; flex-direction: column; gap: 0; padding: 8px 0;
+  }
+  .nav.is-open .nav__list { display: flex; }
+  .nav__link { padding: 14px 24px; text-align: left; }
+  .nav__link::after { left: 24px; right: auto; width: 16px; bottom: 10px; }
+  .grid--3 { grid-template-columns: 1fr; }
+  .footer__cols { grid-template-columns: 1fr 1fr; }
+  .utility__weather { display: none; }
+  .lead__dek { font-size: 17px; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- ============ SKIP LINK (접근성) ============ -->
+  <a class="skip-link" href="#main">본문 바로가기</a>
+
+  <!-- ============ ① 유틸리티 바 ============ -->
+  <div class="utility">
+    <div class="container utility__inner">
+      <p class="utility__date" id="js-date">2026년 5월 30일 토요일</p>
+      <div class="utility__right">
+        <span class="utility__weather">인천 송도 · 21°C 맑음</span>
+        <a href="#" class="utility__link">로그인</a>
+        <a href="#" class="utility__link utility__link--accent">구독</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ② 마스트헤드 (로고) ============ -->
+  <header class="masthead">
+    <div class="container masthead__inner">
+      <button class="nav-toggle" id="js-nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="#" class="logo" aria-label="SONGDO and PEOPLE 홈">
+        <span class="logo__line">SONGDO</span>
+        <span class="logo__amp">&amp;</span>
+        <span class="logo__line">PEOPLE</span>
+      </a>
+      <button class="search-btn" aria-label="검색">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ ③ 내비게이션 ============ -->
+  <nav class="nav" id="js-nav" aria-label="주요 메뉴">
+    <div class="container">
+      <ul class="nav__list">
+        <li><a href="#" class="nav__link is-active">홈</a></li>
+        <li><a href="#" class="nav__link">정치</a></li>
+        <li><a href="#" class="nav__link">경제</a></li>
+        <li><a href="#" class="nav__link">사회</a></li>
+        <li><a href="#" class="nav__link">국제</a></li>
+        <li><a href="#" class="nav__link">문화</a></li>
+        <li><a href="#" class="nav__link">스포츠</a></li>
+        <li><a href="#" class="nav__link">오피니언</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============ ④ 속보 티커 ============ -->
+  <div class="ticker" aria-label="속보">
+    <div class="container ticker__inner">
+      <span class="ticker__label">속보</span>
+      <div class="ticker__viewport">
+        <div class="ticker__track">
+          <span class="ticker__item">송도 신규 바이오 연구단지 착공식, 국내외 30개 기업 입주 확정</span>
+          <span class="ticker__item">한국은행 기준금리 동결 발표… 시장 하반기 인하 기대</span>
+          <span class="ticker__item">인천국제공항 제2터미널 확장 완료, 연간 1억 명 시대 개막</span>
+          <span class="ticker__item">송도 신규 바이오 연구단지 착공식, 국내외 30개 기업 입주 확정</span>
+          <span class="ticker__item">한국은행 기준금리 동결 발표… 시장 하반기 인하 기대</span>
+          <span class="ticker__item">인천국제공항 제2터미널 확장 완료, 연간 1억 명 시대 개막</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+  <div class="container">
+
+    <!-- ============ ⑤ 히어로 (톱기사) ============ -->
+    <section class="hero" aria-label="주요 기사">
+      <article class="lead">
+        <span class="kicker">단독 · 도시개발</span>
+        <h1 class="lead__title">송도국제도시, 글로벌 바이오 허브로 도약하다</h1>
+        <p class="lead__dek">국내외 30개 바이오·제약 기업이 입주를 확정한 신규 연구단지가 착공에 들어갔다. 송도는 2030년까지 동북아 바이오 생산의 핵심 거점으로 자리매김할 전망이다.</p>
+        <figure class="lead__figure">
+          <!-- 실제 사진으로 교체: <img src="images/lead.jpg" alt="..."> -->
+          <svg class="ph ph--lead" viewBox="0 0 800 460" role="img" aria-label="기사 대표 이미지 자리">
+            <rect width="800" height="460"/>
+            <line x1="60" y1="400" x2="240" y2="180"/><line x1="240" y1="180" x2="420" y2="300"/>
+            <line x1="420" y1="300" x2="600" y2="120"/><line x1="600" y1="120" x2="740" y2="220"/>
+            <circle cx="600" cy="120" r="6"/><circle cx="240" cy="180" r="6"/>
+          </svg>
+          <figcaption class="figcaption">송도 7공구 신규 연구단지 조감도. — 송도앤피플 자료사진</figcaption>
+        </figure>
+        <p class="byline">박지현 기자 · 5월 30일</p>
+      </article>
+
+      <aside class="rail" aria-label="보조 기사">
+        <article class="rail__item">
+          <span class="kicker kicker--sm">경제</span>
+          <h2 class="rail__title"><a href="#">한국은행 기준금리 동결… "하반기 인하 기대감"</a></h2>
+          <p class="rail__dek">금융통화위원회가 기준금리를 현 수준에서 유지하기로 결정했다. 시장은 물가 안정세를 근거로 연내 인하 가능성에 무게를 두고 있다.</p>
+        </article>
+        <article class="rail__item">
+          <span class="kicker kicker--sm">사회</span>
+          <h2 class="rail__title"><a href="#">인천공항 제2터미널 확장 완료, 연 1억 명 시대</a></h2>
+          <p class="rail__dek">제2여객터미널 확장 공사가 마무리되며 인천국제공항의 연간 수용 능력이 1억 명을 넘어섰다.</p>
+        </article>
+        <article class="rail__item rail__item--last">
+          <span class="kicker kicker--sm">국제</span>
+          <h2 class="rail__title"><a href="#">아시아 주요 도시, 탄소중립 공동 선언 채택</a></h2>
+          <p class="rail__dek">서울·도쿄·싱가포르 등 12개 도시가 2040년 탄소중립 달성을 위한 공동 협약에 서명했다.</p>
+        </article>
+      </aside>
+    </section>
+
+    <!-- ============ ⑥ 주요뉴스 그리드 ============ -->
+    <section class="section" aria-label="주요 뉴스">
+      <div class="section__head">
+        <h2 class="section__title">주요 뉴스</h2>
+      </div>
+      <div class="grid grid--3">
+        <article class="card">
+          <figure class="card__figure">
+            <svg class="ph" viewBox="0 0 400 240" role="img" aria-label="이미지 자리"><rect width="400" height="240"/><line x1="40" y1="180" x2="160" y2="80"/><line x1="160" y1="80" x2="280" y2="150"/><line x1="280" y1="150" x2="360" y2="70"/></svg>
+          </figure>
+          <span class="kicker kicker--sm">정치</span>
+          <h3 class="card__title"><a href="#">국회, 지방분권 강화 법안 본회의 통과</a></h3>
+          <p class="card__dek">지역 균형 발전을 위한 핵심 법안이 여야 합의로 처리됐다. 시행은 내년 1월부터.</p>
+        </article>
+        <article class="card">
+          <figure class="card__figure">
+            <svg class="ph" viewBox="0 0 400 240" role="img" aria-label="이미지 자리"><rect width="400" height="240"/><circle cx="200" cy="120" r="60"/><line x1="80" y1="120" x2="140" y2="120"/><line x1="260" y1="120" x2="320" y2="120"/></svg>
+          </figure>
+          <span class="kicker kicker--sm">문화</span>
+          <h3 class="card__title"><a href="#">송도 아트페어 개막… 관람객 20만 돌파</a></h3>
+          <p class="card__dek">국내외 작가 200여 명이 참여한 현대미술 축제가 역대 최대 규모로 열렸다.</p>
+        </article>
+        <article class="card card--last">
+          <figure class="card__figure">
+            <svg class="ph" viewBox="0 0 400 240" role="img" aria-label="이미지 자리"><rect width="400" height="240"/><line x1="60" y1="60" x2="60" y2="180"/><line x1="140" y1="100" x2="140" y2="180"/><line x1="220" y1="40" x2="220" y2="180"/><line x1="300" y1="130" x2="300" y2="180"/></svg>
+          </figure>
+          <span class="kicker kicker--sm">스포츠</span>
+          <h3 class="card__title"><a href="#">인천 연고 구단, 시즌 첫 홈경기 매진</a></h3>
+          <p class="card__dek">새 시즌 개막전이 매진을 기록하며 지역 팬들의 뜨거운 성원을 받았다.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ ⑦ 카테고리 섹션: 경제 / 국제 ============ -->
+    <section class="section split" aria-label="경제와 국제">
+      <div class="split__col">
+        <div class="section__head">
+          <h2 class="section__title">경제</h2>
+          <a href="#" class="section__more">전체 보기</a>
+        </div>
+        <ol class="list">
+          <li class="list__item"><a href="#">반도체 수출 3개월 연속 증가… 회복 신호 뚜렷</a></li>
+          <li class="list__item"><a href="#">송도 스타트업 밸리, 올해 투자 유치 1조 원 돌파</a></li>
+          <li class="list__item"><a href="#">원·달러 환율 안정세… 무역수지 흑자 전환</a></li>
+          <li class="list__item"><a href="#">국내 전기차 보급 200만 대 넘어서</a></li>
+          <li class="list__item list__item--last"><a href="#">물류 자동화 투자 확대, 인천항 처리량 최대</a></li>
+        </ol>
+      </div>
+      <div class="split__col">
+        <div class="section__head">
+          <h2 class="section__title">국제</h2>
+          <a href="#" class="section__more">전체 보기</a>
+        </div>
+        <ol class="list">
+          <li class="list__item"><a href="#">유럽연합, 디지털 규제안 최종 합의</a></li>
+          <li class="list__item"><a href="#">기후 정상회의, 재생에너지 전환 가속 합의</a></li>
+          <li class="list__item"><a href="#">아시아 교역 회복세… 역내 협력 강화</a></li>
+          <li class="list__item"><a href="#">우주 탐사 국제 공동 프로젝트 본격 가동</a></li>
+          <li class="list__item list__item--last"><a href="#">세계 주요국, 인공지능 안전 기준 논의 착수</a></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ ⑧ 오피니언 ============ -->
+    <section class="section opinion" aria-label="오피니언">
+      <div class="section__head">
+        <h2 class="section__title">오피니언</h2>
+      </div>
+      <div class="grid grid--3">
+        <article class="op">
+          <blockquote class="op__quote">도시의 미래는 건물이 아니라 그 안에 사는 사람들의 이야기로 완성된다.</blockquote>
+          <p class="op__author">김도윤 · 논설위원</p>
+        </article>
+        <article class="op">
+          <blockquote class="op__quote">기술은 빠르게 변하지만, 좋은 저널리즘의 원칙은 변하지 않는다.</blockquote>
+          <p class="op__author">이서연 · 편집국장</p>
+        </article>
+        <article class="op op--last">
+          <blockquote class="op__quote">지역의 목소리에 귀 기울일 때, 비로소 진짜 공론장이 열린다.</blockquote>
+          <p class="op__author">정민호 · 객원논설위원</p>
+        </article>
+      </div>
+    </section>
+
+  </div>
+  </main>
+
+  <!-- ============ ⑨ 푸터 ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="logo logo--footer" aria-label="SONGDO and PEOPLE">
+          <span class="logo__line">SONGDO</span>
+          <span class="logo__amp">&amp;</span>
+          <span class="logo__line">PEOPLE</span>
+        </a>
+        <p class="footer__tagline">신뢰받는 지역·국제 저널리즘</p>
+      </div>
+      <nav class="footer__cols" aria-label="푸터 메뉴">
+        <div class="footer__col">
+          <h4 class="footer__h">섹션</h4>
+          <a href="#">정치</a><a href="#">경제</a><a href="#">사회</a>
+          <a href="#">국제</a><a href="#">문화</a><a href="#">스포츠</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__h">회사</h4>
+          <a href="#">회사 소개</a><a href="#">윤리강령</a>
+          <a href="#">광고 문의</a><a href="#">채용</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__h">고객</h4>
+          <a href="#">구독 안내</a><a href="#">제보하기</a>
+          <a href="#">고객센터</a><a href="#">정정보도</a>
+        </div>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <p>© 2026 SONGDO &amp; PEOPLE. All rights reserved.</p>
+      <p>인천광역시 연수구 송도과학로 · 등록번호 인천-가-00000</p>
+    </div>
+  </footer>
+
+  <script>
+/* SONGDO & PEOPLE — 최소한의 동작만 (Rams: as little design as possible) */
+(function () {
+  "use strict";
+
+  /* ① 오늘 날짜 자동 표기 */
+  var dateEl = document.getElementById("js-date");
+  if (dateEl) {
+    var days = ["일", "월", "화", "수", "목", "금", "토"];
+    var now = new Date();
+    dateEl.textContent =
+      now.getFullYear() + "년 " + (now.getMonth() + 1) + "월 " +
+      now.getDate() + "일 " + days[now.getDay()] + "요일";
+  }
+
+  /* ② 모바일 내비게이션 토글 */
+  var toggle = document.getElementById("js-nav-toggle");
+  var nav = document.getElementById("js-nav");
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
+    });
+  }
+})();
+
+  </script>
+</body>
+</html>
